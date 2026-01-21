@@ -1,0 +1,178 @@
+{
+  "component_name": "Property Verification Card",
+  "summary": {
+    "goal": "Extract the verification card into a shared component with stable props",
+    "why_now": "Upcoming reuse in the onboarding flow needs a clean interface",
+    "primary_outcome": "Shared UI component with no direct store access"
+  },
+  "assumptions": [
+    "The card is currently only used in the property details page",
+    "Verification status is provided by a feature-level store"
+  ],
+  "scope": {
+    "in_scope": [
+      "Move card component and styles",
+      "Replace store access with typed props",
+      "Update current call sites"
+    ],
+    "out_of_scope": [
+      "Redesigning card visuals",
+      "Refactoring verification API client"
+    ]
+  },
+  "current_state": {
+    "location": "client/components/PropertyVerification/PropertyCard.tsx",
+    "ownership": "Client Portal UI",
+    "dependencies": [
+      "verificationStore",
+      "api/verifyProperty",
+      "ui/Button"
+    ],
+    "pain_points": [
+      "Tight coupling to feature store",
+      "Hard to reuse across flows"
+    ]
+  },
+  "target_state": {
+    "location": "shared/components/property-verification/PropertyVerificationCard.tsx",
+    "ownership": "Shared UI",
+    "success_criteria": [
+      "Props are fully typed and documented",
+      "No direct store or API calls inside the component"
+    ]
+  },
+  "component_inventory": [
+    {
+      "component": "PropertyVerificationCard",
+      "responsibility": "Render property status and CTA",
+      "inputs": [
+        "property",
+        "status",
+        "onVerify"
+      ],
+      "outputs": [
+        "onVerify"
+      ],
+      "state": "None (controlled)",
+      "notes": "Keep side effects outside"
+    },
+    {
+      "component": "VerificationStatusPill",
+      "responsibility": "Show status badge",
+      "inputs": [
+        "status"
+      ],
+      "outputs": [],
+      "state": "None",
+      "notes": "Can remain co-located"
+    }
+  ],
+  "extraction_plan": [
+    "Define shared props interface in shared UI package",
+    "Move component and styles to shared folder",
+    "Replace store selectors with props",
+    "Add adapter wrapper in feature module",
+    "Update existing usage to use adapter"
+  ],
+  "file_moves": [
+    {
+      "from": "client/components/PropertyVerification/PropertyCard.tsx",
+      "to": "shared/components/property-verification/PropertyVerificationCard.tsx",
+      "notes": "Main component move"
+    },
+    {
+      "from": "client/components/PropertyVerification/PropertyCard.module.css",
+      "to": "shared/components/property-verification/PropertyVerificationCard.module.css",
+      "notes": "Shared styles"
+    }
+  ],
+  "dependency_changes": [
+    {
+      "dependency": "verificationStore",
+      "change": "Remove",
+      "rationale": "Shared UI should be stateless"
+    },
+    {
+      "dependency": "api/verifyProperty",
+      "change": "Move to caller",
+      "rationale": "Side effects stay in feature layer"
+    }
+  ],
+  "migration": {
+    "prerequisites": [
+      "Add shared UI export barrel",
+      "Define TypeScript types in shared package"
+    ],
+    "steps": [
+      "Create new shared component and export",
+      "Wrap with adapter in old location",
+      "Update imports to use adapter",
+      "Remove legacy store usage from component"
+    ],
+    "api_mapping": [
+      {
+        "old": "<PropertyCard status={store.status} />",
+        "new": "<PropertyVerificationCard status={status} onVerify={onVerify} />",
+        "change_type": "Breaking",
+        "deprecation": "v2.3",
+        "notes": "Requires adapter or new props"
+      }
+    ],
+    "rollout": [
+      "Ship adapter first",
+      "Migrate existing call sites",
+      "Remove legacy export in next minor release"
+    ],
+    "testing": [
+      "Add unit tests for props mapping",
+      "Verify status rendering states",
+      "Mock onVerify callback"
+    ],
+    "validation": [
+      "Smoke test property details page",
+      "Verify analytics event still fires"
+    ],
+    "rollback": [
+      "Revert import changes",
+      "Restore legacy component export"
+    ]
+  },
+  "wireframe": {
+    "nodes": [
+      "Property Details Page",
+      "Property Verification Card",
+      "Status Pill",
+      "Verify Button"
+    ],
+    "edges": [
+      [
+        "Property Details Page",
+        "Property Verification Card"
+      ],
+      [
+        "Property Verification Card",
+        "Status Pill"
+      ],
+      [
+        "Property Verification Card",
+        "Verify Button"
+      ]
+    ]
+  },
+  "risks": [
+    {
+      "risk": "Hidden coupling to store selectors",
+      "impact": "Runtime errors in reused flows",
+      "mitigation": "Adapter wrapper with type guards"
+    },
+    {
+      "risk": "Props surface grows over time",
+      "impact": "Harder to maintain shared component",
+      "mitigation": "Document contract and add lint rules"
+    }
+  ],
+  "open_questions": [
+    "Should the adapter live in the feature or shared layer?",
+    "Do we need a separate analytics callback prop?"
+  ]
+}
