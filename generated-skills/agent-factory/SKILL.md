@@ -1,6 +1,6 @@
 ---
 name: agent-factory
-description: Design focused coding subagents for a specific repository or workflow. Use when creating or revising agent definitions, responsibilities, tool access, delegation boundaries, or agent prompts.
+description: Design or revise focused coding-agent and subagent definitions for a specific repository or workflow. Use for agent responsibilities, prompts, tool access, permissions, and static delegation boundaries. Do not use to supervise or orchestrate an active subagent workflow.
 ---
 
 # Agent Factory
@@ -26,6 +26,7 @@ Create the smallest useful agent definition for the requested job.
 
 ## Guardrails
 
+- This is a design-time skill. Runtime decomposition, assignment, monitoring, escalation, and integration of subagent work belong to `agent-supervision`.
 - Avoid delegation for trivial, single-step work.
 - Do not hard-code model names or platform-specific fields unless the target project already uses them or current documentation confirms them.
 - Treat tool access, shell execution, network actions, and writes as explicit capabilities.
