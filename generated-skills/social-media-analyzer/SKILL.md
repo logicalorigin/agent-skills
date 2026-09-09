@@ -1,70 +1,35 @@
 ---
 name: social-media-analyzer
-description: Analyzes social media campaign performance across platforms with engagement metrics, ROI calculations, and audience insights for data-driven marketing decisions
+description: Analyze supplied social-media campaign and content metrics across platforms, including engagement, traffic, cost efficiency, ROI inputs, audience patterns, and test opportunities. Use for performance reviews and campaign optimization.
 ---
 
-# Social Media Campaign Analyzer
+# Social Media Analyzer
 
-This skill provides comprehensive analysis of social media campaign performance, helping marketing agencies deliver actionable insights to clients.
+Turn supplied campaign data into comparable metrics and testable recommendations.
 
-## Capabilities
+## Workflow
 
-- **Multi-Platform Analysis**: Track performance across Facebook, Instagram, Twitter, LinkedIn, TikTok
-- **Engagement Metrics**: Calculate engagement rate, reach, impressions, click-through rate
-- **ROI Analysis**: Measure cost per engagement, cost per click, return on ad spend
-- **Audience Insights**: Analyze demographics, peak engagement times, content performance
-- **Trend Detection**: Identify high-performing content types and posting patterns
-- **Competitive Benchmarking**: Compare performance against industry standards
+1. Identify the platforms, date range, campaign objectives, paid versus organic scope, and available metrics.
+2. Normalize metric definitions before comparing periods or platforms. Do not assume similarly named metrics are calculated identically everywhere.
+3. Calculate engagement, traffic, spend, conversion, or return metrics only when the required inputs exist.
+4. Compare against the user's own baseline or a clearly identified external benchmark. Label missing denominators and incomplete attribution.
+5. Identify patterns by content type, audience, timing, creative, or campaign segment while considering sample size and confounders.
+6. Convert the strongest findings into prioritized tests or operational changes with a measurable success criterion.
 
-## Input Requirements
+## Bundled resources
 
-Campaign data including:
-- **Platform metrics**: Likes, comments, shares, saves, clicks
-- **Reach data**: Impressions, unique reach, follower growth
-- **Cost data**: Ad spend, campaign budget (for ROI calculations)
-- **Content details**: Post type (image, video, carousel), posting time, hashtags
-- **Time period**: Date range for analysis
+- `calculate_metrics.py` — core metric calculations.
+- `analyze_performance.py` — performance analysis and recommendation support.
+- `sample_input.json`, `expected_output.json`, `HOW_TO_USE.md`.
 
-Formats accepted:
-- JSON with structured campaign data
-- CSV exports from social media platforms
-- Text descriptions of key metrics
+## Guardrails
 
-## Output Formats
+- Never invent impressions, reach, conversions, spend, follower counts, attribution, or benchmark data.
+- Do not infer causality from correlation alone.
+- Keep paid and organic performance separate unless the analysis explicitly models both.
+- Avoid cross-platform ranking when metrics or objectives are not comparable.
+- State when ROI cannot be calculated because revenue or conversion value is missing.
 
-Results include:
-- **Performance dashboard**: Key metrics with trends
-- **Engagement analysis**: Best and worst performing posts
-- **ROI breakdown**: Cost efficiency metrics
-- **Audience insights**: Demographics and behavior patterns
-- **Recommendations**: Data-driven suggestions for optimization
-- **Visual reports**: Charts and graphs (Excel/PDF format)
+## Output
 
-## How to Use
-
-"Analyze this Facebook campaign data and calculate engagement metrics"
-"What's the ROI on this Instagram ad campaign with $500 spend and 2,000 clicks?"
-"Compare performance across all social platforms for the last month"
-
-## Scripts
-
-- `calculate_metrics.py`: Core calculation engine for all social media metrics
-- `analyze_performance.py`: Performance analysis and recommendation generation
-
-## Best Practices
-
-1. Ensure data completeness before analysis (missing metrics affect accuracy)
-2. Compare metrics within same time periods for fair comparisons
-3. Consider platform-specific benchmarks (Instagram engagement differs from LinkedIn)
-4. Account for organic vs. paid metrics separately
-5. Track metrics over time to identify trends
-6. Include context (seasonality, campaigns, events) when interpreting results
-
-## Limitations
-
-- Requires accurate data from social media platforms
-- Industry benchmarks are general guidelines and vary by niche
-- Historical data doesn't guarantee future performance
-- Organic reach calculations may vary by platform algorithm changes
-- Cannot access data directly from platforms (requires manual export or API integration)
-- Some platforms limit data availability (e.g., TikTok analytics for business accounts only)
+Return key metrics, strongest findings, material data-quality caveats, and prioritized tests or actions tied to the campaign objective.
