@@ -1,6 +1,6 @@
 ---
 name: agent-supervision
-description: Supervise a parent-agent workflow that delegates bounded work to subagents. Use when one agent owns decomposition, assignment, monitoring, validation, and integration of subagent work. Do not use for coordinating peer agents, external terminal agents, or ordinary single-agent tasks.
+description: Supervise a parent-agent workflow that delegates bounded work to subagents. Use only when the current agent owns decomposition, assignment, monitoring, validation, and integration of its subagents. Do not use for peer agents, separate terminal agents, external agent runners, or ordinary single-agent work.
 ---
 
 # Agent Supervision
@@ -9,51 +9,62 @@ Use intelligence where ambiguity is expensive; use cheaper execution where the w
 
 ## Scope
 
-This skill applies only when the current agent is the **parent/supervisor** of one or more subagents and remains responsible for the final outcome.
+This skill applies only when the current agent is the **parent/supervisor** of subagents and remains responsible for the final result.
 
-Do not use it to coordinate separate terminal sessions, peer agents, external agent runners, or independent agents that the current agent does not directly supervise. Do not delegate trivial work that is faster to complete directly.
+It is not a multi-terminal coordinator, peer-agent protocol, external-agent bridge, or general project-management skill. For creating or revising agent definitions, use `agent-factory` instead.
 
-## Workflow
+## Operating Model
 
-1. **Diagnose before delegating.** The supervisor establishes the real problem, relevant constraints, likely root cause, architecture/contract implications, risks, and success criteria before spawning execution work.
-2. **Plan at the highest useful capability.** Use the higher-capability reasoning tier for ambiguity, decomposition, architectural decisions, dependency ordering, security-sensitive judgment, migrations, cross-cutting changes, and recovery from failed assumptions. Do not spend this tier on mechanical execution once the path is clear.
-3. **Delegate bounded execution downward.** Send lower-cost/lower-capability subagents narrowly defined tasks such as localized implementation, mechanical refactors, test additions, targeted inspection, formatting, or verification that does not require unresolved judgment.
-4. **Minimize the handoff.** Give each subagent only the objective, necessary context/files, constraints, write scope, expected deliverable, acceptance criteria, and escalation conditions. Pass conclusions and decisions instead of the supervisor's full conversation or reasoning history.
-5. **Avoid duplicate discovery.** Do not ask multiple subagents to rediscover facts the supervisor already established unless independent verification is itself valuable.
-6. **Parallelize only independent work.** Run tasks concurrently when they do not share mutable state or depend on one another. Serialize dependency-bound or overlapping edits to avoid conflicts and rework.
-7. **Escalate judgment upward.** A subagent should stop and return control when it encounters material ambiguity, a contradicted assumption, unexpected architecture, contract/schema changes, security or data-loss risk, repeated failure, or a decision outside its brief.
-8. **Verify and integrate centrally.** The supervisor reviews outputs against the original success criteria, resolves conflicts, runs or assigns the necessary validation, and owns the final integrated result.
+Use a **diagnose -> dispatch -> verify** loop.
+
+1. **Diagnose minimally.** Before delegation, resolve only the uncertainty needed to choose a safe plan: the real problem, relevant constraints, dependencies, risk, and success criteria. Do not explore broadly when the task is already obvious.
+2. **Spend capability on judgment.** When the runtime supports model or effort selection, use a higher-capability reasoning tier for ambiguous diagnosis, architecture, decomposition, migrations, security-sensitive choices, cross-cutting changes, conflict resolution, and failed assumptions.
+3. **Dispatch bounded execution downward.** Use the lowest-capability tier that can reliably complete deterministic or well-specified work: localized implementation, mechanical refactors, test additions, targeted inspection, formatting, repetitive changes, or straightforward verification.
+4. **Send a compact execution packet.** Include only: objective, necessary files/symbols/context, constraints, allowed write scope, expected deliverable, acceptance criteria, and escalation conditions. If the subagent can read the repository, prefer paths and symbols over pasted source.
+5. **Avoid rediscovery.** Pass established decisions and evidence rather than asking each subagent to repeat diagnosis. Use independent duplicate investigation only when verification is worth its cost.
+6. **Batch related work.** Prefer one coherent delegation over many microtasks when the tasks share context. Spawning and reintegrating a subagent has a cost.
+7. **Parallelize only independent work.** Run tasks concurrently when they do not depend on one another or modify overlapping state. Serialize dependent or conflicting work.
+8. **Escalate judgment upward.** Stop lower-tier execution and return control when assumptions break, requirements are ambiguous, architecture or contracts change, security/data-loss risk appears, repeated failure occurs, or a decision falls outside the brief.
+9. **Verify cheaply first.** Prefer deterministic checks such as tests, type checks, linters, builds, schema validation, and focused diffs. Use higher-capability review for material logic, risky changes, unresolved failures, or integration decisions rather than rereading every mechanical output in full.
+10. **Integrate centrally.** The supervisor owns conflicts, final acceptance, unresolved risk, and the user-facing result.
 
 ## Delegation Test
 
-Delegate only when the expected savings from isolated execution exceed the cost of context transfer, supervision, and integration. Good subagent work is separable, well-specified, and cheaply verifiable.
+Delegate only when:
 
-Prefer direct supervisor work for simple lookups, sequential single-file changes, tightly coupled reasoning, or tasks where explaining the context costs as much as doing the work.
+`execution savings > context transfer + spawn overhead + supervision + integration`
+
+Good subagent work is separable, well-specified, inexpensive to verify, and does not require shared evolving context.
+
+Work directly when the task is trivial, sequential, tightly coupled, single-file, or when explaining it costs roughly as much as completing it.
 
 ## Token Discipline
 
-- Keep the supervisor's working state compact: goal, accepted decisions, active tasks, unresolved risks, and evidence needed for completion.
-- Prefer one strong diagnosis followed by concise execution packets over repeated full-context reasoning by every subagent.
-- Request artifacts, diffs, test results, or concise findings rather than long narratives.
+- Keep supervisor state to: goal, accepted decisions, active tasks, unresolved risks, and completion evidence.
+- Do the expensive reasoning once; send conclusions, not reasoning transcripts.
 - Do not pass hidden chain-of-thought. Pass decisions, assumptions, evidence, constraints, and acceptance criteria.
-- Use the lowest-capability tier that can reliably complete the bounded task; raise capability only when uncertainty or failure justifies it.
-- After a materially failed execution attempt, reassess the plan before spending tokens on repeated retries.
+- Ask subagents for diffs, artifacts, test results, or concise findings—not essays.
+- Do not poll subagents for narration. Use completion results or only necessary checkpoints.
+- Do not use a higher-capability tier for work already reduced to deterministic instructions.
+- Do not repeatedly retry a failing lower-tier agent. After a material failure, re-diagnose the assumption or raise capability.
+- Consolidate adjacent work when shared context would otherwise be resent.
 
 ## Guardrails
 
 - The supervisor retains ownership; delegation does not transfer accountability.
-- Avoid recursive subagent delegation unless the runtime requires it and the added layer clearly reduces total work.
+- Do not supervise peer agents or separate terminal sessions with this skill.
+- Avoid recursive subagent delegation by default. The supervisor should remain the orchestration root.
 - Do not spawn subagents merely to summarize context already available to the supervisor.
-- Do not maximize concurrency for its own sake; integration cost is part of the decision.
-- Do not hard-code model names, prices, context limits, or platform-specific orchestration fields unless verified for the active runtime.
-- Keep high-impact decisions and final acceptance at the supervisor level unless the task is genuinely mechanical.
+- Do not maximize delegation or concurrency for its own sake.
+- Do not hard-code model names, prices, context limits, or orchestration fields unless verified for the active runtime.
+- Keep high-impact judgment at the supervisor level; push execution downward only after ambiguity is sufficiently removed.
 
 ## Output
 
-When useful, track only:
-- current plan and dependencies,
-- delegated task -> capability tier -> scope -> acceptance criteria,
+Track only what helps orchestration:
+- plan and dependencies,
+- task -> capability tier -> scope -> acceptance criteria,
 - escalations or changed assumptions,
-- final verification and unresolved risk.
+- verification evidence and unresolved risk.
 
 Keep supervision state operational and concise; do not turn it into a second project-management system.
