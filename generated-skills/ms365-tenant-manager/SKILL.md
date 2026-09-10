@@ -1,6 +1,6 @@
 ---
 name: ms365-tenant-manager
-description: Plan, generate, or review Microsoft 365 tenant administration workflows for users, groups, licensing, configuration, and PowerShell automation. Use for tenant setup, bulk administration, change scripts, or administrative audits.
+description: Plan or review Microsoft 365 tenant administration for users, groups, licensing, configuration, bulk changes, and PowerShell.
 ---
 
 # Microsoft 365 Tenant Manager

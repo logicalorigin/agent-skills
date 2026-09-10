@@ -1,6 +1,6 @@
 ---
 name: aws-solution-architect
-description: Design or review AWS architectures for reliability, security, scalability, operability, and cost. Use for service selection, architecture tradeoffs, serverless designs, cost optimization, migration planning, or AWS design reviews.
+description: Design or review AWS architectures for workload fit, reliability, security, scaling, cost, and migration tradeoffs.
 ---
 
 # AWS Solution Architect

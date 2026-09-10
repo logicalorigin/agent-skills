@@ -1,6 +1,6 @@
 ---
 name: app-store-optimization
-description: Analyze and improve mobile app-store metadata, keyword strategy, competitor positioning, reviews, localization, experiments, and launch readiness. Use for App Store or Google Play listing audits and ASO planning.
+description: Optimize App Store or Google Play listings using available evidence: metadata, keywords, positioning, reviews, localization, and tests.
 ---
 
 # App Store Optimization

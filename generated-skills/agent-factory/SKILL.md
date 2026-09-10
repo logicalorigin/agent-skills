@@ -1,6 +1,6 @@
 ---
 name: agent-factory
-description: Design or revise focused coding-agent and subagent definitions for a specific repository or workflow. Use for agent responsibilities, prompts, tool access, permissions, and static delegation boundaries. Do not use to supervise or orchestrate an active subagent workflow.
+description: Create or revise coding-agent or subagent definitions, prompts, tools, permissions, and static handoffs. Not for live orchestration.
 ---
 
 # Agent Factory

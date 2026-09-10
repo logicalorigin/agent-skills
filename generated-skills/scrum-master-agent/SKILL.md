@@ -1,6 +1,6 @@
 ---
 name: scrum-master-agent
-description: Analyze sprint, backlog, and delivery data to surface blockers, work-in-progress risk, dependencies, goal risk, and practical Scrum actions. Use for sprint reviews, backlog prioritization, stand-up summaries, or delivery health analysis.
+description: Analyze sprint and backlog data for blockers, dependencies, WIP, goal risk, delivery health, and next actions.
 ---
 
 # Scrum Master Agent

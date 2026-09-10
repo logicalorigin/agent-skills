@@ -1,6 +1,6 @@
 ---
 name: hook-factory
-description: Design, validate, and optionally install coding-agent hooks for repeatable automation around tool use, file changes, tests, formatting, notifications, or workflow checks. Use when creating or revising hook configurations and hook scripts.
+description: Create or revise coding-agent hooks for tool, file, test, formatting, notification, or workflow events.
 ---
 
 # Hook Factory

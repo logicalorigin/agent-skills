@@ -1,6 +1,6 @@
 ---
 name: content-trend-researcher
-description: Research and prioritize current content trends, audience interests, platform angles, and topic opportunities. Use when planning timely content, evaluating topic momentum, or turning trend evidence into content outlines.
+description: Research current content trends and audience signals to prioritize timely topics, platform angles, and evidence-backed outlines.
 ---
 
 # Content Trend Researcher

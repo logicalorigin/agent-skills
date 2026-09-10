@@ -1,6 +1,6 @@
 ---
 name: tech-stack-evaluator
-description: Compare technologies or complete stacks using decision criteria such as fit, ecosystem, cost, security, operations, performance, and migration risk. Use for architecture choices, provider comparisons, TCO analysis, or migration decisions.
+description: Compare technologies or stacks against explicit criteria for architecture, cost, security, operations, performance, and migration.
 ---
 
 # Tech Stack Evaluator

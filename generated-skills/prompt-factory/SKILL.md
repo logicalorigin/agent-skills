@@ -1,6 +1,6 @@
 ---
 name: prompt-factory
-description: Create or optimize reusable prompts from a task brief, workflow, or existing prompt. Use when a prompt needs clearer goals, context, inputs, constraints, output contracts, examples, tool instructions, or evaluation criteria.
+description: Create or optimize reusable prompts when goals, inputs, constraints, outputs, examples, or tool instructions need refinement.
 ---
 
 # Prompt Factory

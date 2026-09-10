@@ -1,6 +1,6 @@
 ---
 name: slash-command-factory
-description: Create or revise focused coding-assistant slash commands, command files, arguments, safe tool usage, and validation. Use when a user needs a repeatable command for a specific development or analysis workflow.
+description: Create or revise a coding-assistant slash command for one repeatable workflow, including arguments, tool scope, and validation.
 ---
 
 # Slash Command Factory

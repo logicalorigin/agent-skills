@@ -1,6 +1,6 @@
 ---
 name: tdd-guide
-description: Guide test-driven development, generate behavior-focused tests and fixtures, analyze coverage, and adapt tests across supported frameworks. Use for red-green-refactor work, missing-test analysis, coverage gaps, or test quality reviews.
+description: Drive test-first development around observable behavior, including red-green-refactor, missing tests, fixtures, coverage, and test quality.
 ---
 
 # TDD Guide

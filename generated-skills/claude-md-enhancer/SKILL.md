@@ -1,6 +1,6 @@
 ---
 name: claude-md-enhancer
-description: Audit and improve repository instruction files such as CLAUDE.md so coding agents receive concise, accurate, non-conflicting project guidance. Use when creating, restructuring, validating, or reducing project-level agent instructions.
+description: Audit or rewrite repository instruction files such as CLAUDE.md to remove stale, conflicting, duplicated, or overbroad guidance.
 ---
 
 # Project Instructions Enhancer

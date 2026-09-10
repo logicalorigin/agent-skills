@@ -1,6 +1,6 @@
 ---
 name: semantic-clarifier
-description: Distinguish naming, formatting, convention, and representation differences from changes that affect behavior, correctness, architecture, security, performance, compatibility, or user-visible outcomes. Use during code review, refactors, migrations, API or schema work, cross-repo comparisons, and legacy-code analysis.
+description: Separate cosmetic semantics from behaviorally significant differences in reviews, refactors, migrations, APIs, schemas, or legacy code.
 ---
 
 # Semantic Clarifier

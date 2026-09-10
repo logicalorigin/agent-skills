@@ -1,6 +1,6 @@
 ---
 name: agent-supervision
-description: Supervise a parent-agent workflow that delegates bounded work to subagents. Use only when the current agent owns decomposition, assignment, monitoring, validation, and integration of its subagents. Do not use for peer agents, separate terminal agents, external agent runners, or ordinary single-agent work.
+description: Supervise subagents directly controlled by the current parent agent for runtime delegation, escalation, verification, and integration. Not peer/terminal agents.
 ---
 
 # Agent Supervision

@@ -1,6 +1,6 @@
 ---
 name: codex-cli-bridge
-description: Translate repository context and coding tasks into safe Codex CLI workflows, including AGENTS.md generation, command construction, execution planning, and result handoff. Use when bridging project instructions or tasks to Codex CLI.
+description: Translate repository instructions and coding tasks into safe Codex CLI context, commands, execution plans, and handoffs.
 ---
 
 # Codex CLI Bridge

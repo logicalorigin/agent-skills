@@ -1,6 +1,6 @@
 ---
 name: social-media-analyzer
-description: Analyze supplied social-media campaign and content metrics across platforms, including engagement, traffic, cost efficiency, ROI inputs, audience patterns, and test opportunities. Use for performance reviews and campaign optimization.
+description: Analyze supplied social-media performance data for campaign metrics, engagement, traffic, cost, ROI inputs, audience patterns, and tests.
 ---
 
 # Social Media Analyzer
